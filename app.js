@@ -12,9 +12,7 @@ var labelsChart = [];
 var dataChart = [];
 var numberOfClicks = 0;
 
-var displayAreaOne = document.getElementById('image_area_one');
-var displayAreaTwo = document.getElementById('image_area_two');
-var displayAreaThree = document.getElementById('image_area_three');
+var displayArea = document.getElementById('image_area');
 
 for(var i = 0; i < paths.length; i++){
   var newItem = new ItemImage(paths[i].split('.')[0], paths[i]);
@@ -23,9 +21,7 @@ for(var i = 0; i < paths.length; i++){
 
 generateLabelsChart();
 
-displayAreaOne.addEventListener('click', clickHandler);
-displayAreaTwo.addEventListener('click', clickHandler);
-displayAreaThree.addEventListener('click', clickHandler);
+displayArea.addEventListener('click', clickHandler);
 
 function clickHandler(event) {
 
@@ -103,9 +99,7 @@ function exitClicks(){
   if (numberOfClicks === 25){
     generateDataChart();
     renderChart();
-    displayAreaOne.removeEventListener('click', clickHandler);
-    displayAreaTwo.removeEventListener('click', clickHandler);
-    displayAreaThree.removeEventListener('click', clickHandler);
+    displayArea.removeEventListener('click', clickHandler);
     return;
   }
 
