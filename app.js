@@ -6,7 +6,6 @@ var paths = ['breakfast.jpg', 'dragon.jpg', 'sweep.png', 'wine-glass.jpg',
   'bathroom.jpg', 'cthulhu.jpg', 'scissors.jpg', 'usb.gif',
   'boots.jpg', 'dog-duck.jpg', 'shark.jpg', 'water-can.jpg'];
 var items = [];
-var displayIndex = 0;
 var totalTurns = [];
 
 
@@ -25,7 +24,6 @@ displayAreaTwo.addEventListener('click', clickHandler);
 displayAreaThree.addEventListener('click', clickHandler);
 
 function clickHandler(event) {
-  items[displayIndex].clicked += 1;
 
   var targetString = event.target.src;
   var targetPath = targetString.split('assets')[1];
@@ -47,44 +45,47 @@ function ItemImage(name, path) {//constructor
   this.shown = 0;
 }
 
-
-
 function changePicture() {
   var imageOne = document.getElementById('image_one');
   var imageTwo = document.getElementById('image_two');
   var imageThree = document.getElementById('image_three');
 
-  var previousTurn = [];
-
+  var imagesPerTurn = [];
   var randomIndex;
+  //var previousTurnImages = [totalTurns[totalTurns.length - 1][0], totalTurns[totalTurns.length - 1][0], totalTurns[totalTurns.length - 1][0]];
+
   for (var i = 0; i < 3; i++) {
     if (i === 1) {
-      while (previousTurn.length === 1) {
+      while (imagesPerTurn.length === 1) {
         randomIndex = generateRandomNumber();
-        if (previousTurn[0] !== randomIndex){
-          previousTurn.push(randomIndex);
+        if (imagesPerTurn[0] !== randomIndex){//&& previousTurnImages[0] !== randomIndex && previousTurnImages[1] !== randomIndex && previousTurnImages[2] !== randomIndex
+          imagesPerTurn.push(randomIndex);
+          items[randomIndex].shown += 1;
         }
       }
     } else if (i === 2) {
-      while (previousTurn.length === 2) {
+      while (imagesPerTurn.length === 2) {
         randomIndex = generateRandomNumber();
-        if (previousTurn[0] !== randomIndex || previousTurn[1] !== randomIndex){
-          previousTurn.push(randomIndex);
+        if (imagesPerTurn[0] !== randomIndex && imagesPerTurn[1] !== randomIndex){// && previousTurnImages[0] !== randomIndex && previousTurnImages[1] !== randomIndex && previousTurnImages[2] !== randomIndex
+          imagesPerTurn.push(randomIndex);
+          items[randomIndex].shown += 1;
         }
       }
     } else {
       randomIndex = generateRandomNumber();
-      previousTurn.push(randomIndex);
+      //if (previousTurnImages[0] !== randomIndex && previousTurnImages[1] !== randomIndex && previousTurnImages[2] !== randomIndex) {
+      imagesPerTurn.push(randomIndex);
+      items[randomIndex].shown += 1;
+      //}
     }
   }
-  imageOne.src = 'assets/' + paths[previousTurn[0]];
-  imageTwo.src = 'assets/' + paths[previousTurn[1]];
-  imageThree.src = 'assets/' + paths[previousTurn[2]];
+  imageOne.src = 'assets/' + paths[imagesPerTurn[0]];
+  imageTwo.src = 'assets/' + paths[imagesPerTurn[1]];
+  imageThree.src = 'assets/' + paths[imagesPerTurn[2]];
 
-  totalTurns.push(previousTurn);
+  totalTurns.push(imagesPerTurn);
 
   function generateRandomNumber() {
     return Math.floor(Math.random() * paths.length);
   }
-
 }
