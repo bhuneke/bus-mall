@@ -23,6 +23,8 @@ generateLabelsChart();
 
 displayArea.addEventListener('click', clickHandler);
 
+retrieveLocal();
+
 function clickHandler(event) {
 
   var targetString = event.target.src;
@@ -38,6 +40,9 @@ function clickHandler(event) {
   }
   changePicture();
   exitClicks();
+  percentageClicked();
+  recommendItem();
+  storeLocal();
 }
 
 function ItemImage(name, path) {//constructor
@@ -45,7 +50,29 @@ function ItemImage(name, path) {//constructor
   this.path = 'assets/' + path;
   this.clicked = 0;
   this.shown = 0;
+  this.rawPercentage = 0;
+  this.roundPercentage = 0;
+  this.recommendation = '';
 }
+
+function percentageClicked() {
+  for (var i = 0; i < items.length; i++) {
+    var rawPercentage = (items[i].clicked / items[i].shown) * 100;
+    var roundPercentage = Math.round(rawPercentage) + '%';
+    items[i].rawPercentage = rawPercentage;
+    items[i].roundPercentage = roundPercentage;
+  }
+};
+
+function recommendItem(){
+  for (var i = 0; i < items.length; i++) {
+    if (items[i].rawPercentage < 40) {
+      items[i].recommendation = 'no';
+    } else {
+      items[i].recommendation = 'yes';
+    }
+  }
+};
 
 function changePicture() {
   var imageOne = document.getElementById('image_one');
@@ -111,7 +138,6 @@ function generateLabelsChart() {
     labelsChart.push(label);
   }
 };
-console.log('labelsChart: ' + labelsChart);
 
 function generateDataChart() {
   for (var i = 0; i < items.length; i++){
@@ -119,7 +145,16 @@ function generateDataChart() {
     dataChart.push(data);
   }
 };
-console.log('dataChart: ' + dataChart);
+
+function storeLocal() {
+  var itemsJSON = JSON.stringify(items);
+  localStorage.setItem('items', itemsJSON);
+};
+
+function retrieveLocal() {
+  var storedItemsString = localStorage.getItem('items');
+  items = JSON.parse(storedItemsString);
+}
 
 
 function renderChart() {
