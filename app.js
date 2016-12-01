@@ -101,10 +101,12 @@ function changePicture() {
         }
       }
     } else {
-      randomIndex = generateRandomNumber();
-      if (previousTurnImages[0] !== randomIndex && previousTurnImages[1] !== randomIndex && previousTurnImages[2] !== randomIndex) {
-        imagesPerTurn.push(randomIndex);
-        items[randomIndex].shown += 1;
+      while (imagesPerTurn.length === 0) {
+        randomIndex = generateRandomNumber();
+        if (previousTurnImages[0] !== randomIndex && previousTurnImages[1] !== randomIndex && previousTurnImages[2] !== randomIndex) {
+          imagesPerTurn.push(randomIndex);
+          items[randomIndex].shown += 1;
+        }
       }
     }
   }
@@ -157,7 +159,7 @@ function retrieveLocal() {//need statement to check to see if items exists in lo
     items = JSON.parse(storedItemsString);
   } else {
     for (var i = 0; i < paths.length; i++) {
-      var newItem = new ItemImage(path[i]);
+      var newItem = new ItemImage(path[i].split('.')[0], paths[i]);
       items. push(newItem);
     }
   }
@@ -173,48 +175,48 @@ function renderChart() {
         label: '# of clicks',
         data: dataChart,
         backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)',
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)',
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)',
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)'
+          'rgba(255, 215, 0, 0.2)',
+          'rgba(255, 215, 0, 0.2)',
+          'rgba(255, 215, 0, 0.2)',
+          'rgba(255, 215, 0, 0.2)',
+          'rgba(255, 215, 0, 0.2)',
+          'rgba(255, 215, 0, 0.2)',
+          'rgba(255, 215, 0, 0.2)',
+          'rgba(255, 215, 0, 0.2)',
+          'rgba(255, 215, 0, 0.2)',
+          'rgba(255, 215, 0, 0.2)',
+          'rgba(255, 215, 0, 0.2)',
+          'rgba(255, 215, 0, 0.2)',
+          'rgba(255, 215, 0, 0.2)',
+          'rgba(255, 215, 0, 0.2)',
+          'rgba(255, 215, 0, 0.2)',
+          'rgba(255, 215, 0, 0.2)',
+          'rgba(255, 215, 0, 0.2)',
+          'rgba(255, 215, 0, 0.2)',
+          'rgba(255, 215, 0, 0.2)',
+          'rgba(255, 215, 0, 0.2)'
         ],
         borderColor: [
-          'rgba(255,99,132,1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)',
-          'rgba(255,99,132,1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)',
-          'rgba(255,99,132,1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)',
-          'rgba(255,99,132,1)',
-          'rgba(54, 162, 235, 1)'
+          'rgba(255, 215, 0, 1)',
+          'rgba(255, 215, 0, 1)',
+          'rgba(255, 215, 0, 1)',
+          'rgba(255, 215, 0, 1)',
+          'rgba(255, 215, 0, 1)',
+          'rgba(255, 215, 0, 1)',
+          'rgba(255, 215, 0, 1)',
+          'rgba(255, 215, 0, 1)',
+          'rgba(255, 215, 0, 1)',
+          'rgba(255, 215, 0, 1)',
+          'rgba(255, 215, 0, 1)',
+          'rgba(255, 215, 0, 1)',
+          'rgba(255, 215, 0, 1)',
+          'rgba(255, 215, 0, 1)',
+          'rgba(255, 215, 0, 1)',
+          'rgba(255, 215, 0, 1)',
+          'rgba(255, 215, 0, 1)',
+          'rgba(255, 215, 0, 1)',
+          'rgba(255, 215, 0, 1)',
+          'rgba(255, 215, 0, 1)'
         ],
         borderWidth: 1
       }]
