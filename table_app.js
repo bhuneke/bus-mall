@@ -20,11 +20,16 @@ function renderTable(){
     itemClicks.textContent = items[i].clicked;
     itemPercentage.textContent = items[i].percentage;
     itemRecommendation.textContent = items[i].recommendation;
+
     tableRow.appendChild(itemName);
     tableRow.appendChild(itemViews);
     tableRow.appendChild(itemClicks);
     tableRow.appendChild(itemPercentage);
     tableRow.appendChild(itemRecommendation);
+
+    if (items[i].recommendation === 'yes') {
+      tableRow.setAttribute('class', 'recommended');
+    }
 
     itemsTable.appendChild(tableRow);
   }
