@@ -11,6 +11,7 @@ var previousTurnImages = [0, 0, 0];
 var labelsChart = [];
 var dataChart = [];
 var numberOfClicks = 0;
+var storedItemsString = localStorage.getItem('items');
 
 var displayArea = document.getElementById('image_area');
 
@@ -151,11 +152,16 @@ function storeLocal() {
   localStorage.setItem('items', itemsJSON);
 };
 
-function retrieveLocal() {
-  var storedItemsString = localStorage.getItem('items');
-  items = JSON.parse(storedItemsString);
+function retrieveLocal() {//need statement to check to see if items exists in local storage at all
+  if (storedItemsString) {
+    items = JSON.parse(storedItemsString);
+  } else {
+    for (var i = 0; i < paths.length; i++) {
+      var newItem = new ItemImage(path[i]);
+      items. push(newItem);
+    }
+  }
 }
-
 
 function renderChart() {
   var ctx = document.getElementById('my_chart');
