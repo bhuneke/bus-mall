@@ -18,7 +18,7 @@ function renderTable(){
     itemName.textContent = items[i].name;
     itemViews.textContent = items[i].shown;
     itemClicks.textContent = items[i].clicked;
-    itemPercentage.textContent = items[i].percentage;
+    itemPercentage.textContent = items[i].roundPercentage;
     itemRecommendation.textContent = items[i].recommendation;
 
     tableRow.appendChild(itemName);
